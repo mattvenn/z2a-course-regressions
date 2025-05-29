@@ -35,8 +35,7 @@ runs:
       run: |
         docker run --rm \
           --entrypoint bash \
-          -e USER_ID=${{ steps.ids.outputs.uid }} \
-          -e GROUP_ID=${{ steps.ids.outputs.gid }} \
+          -u ${{ steps.ids.outputs.uid }}:${{ steps.ids.outputs.gid }} \
           -v ${{ github.workspace }}:/work \
           -w /work \
           hpretl/iic-osic-tools \
