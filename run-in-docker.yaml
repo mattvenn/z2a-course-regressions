@@ -1,0 +1,50 @@
+name: Run Simulation in Docker
+description: Clone a repo, run a simulation command in Docker, and upload an artifact
+
+inputs:
+  repo:
+    description: GitHub repo to checkout
+    required: true
+  ref:
+    description: Branch or tag to checkout
+    required: true
+  command:
+    description: Command to run inside Docker
+    required: true
+  artifact_file:
+    description: File to upload as artifact
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: ${{ inputs.repo }}
+        ref: ${{ inputs.ref }}
+
+    - name: Get UID and GID
+      id: ids
+      shell: bash
+      run: |
+        echo "uid=$(id -u)" >> $GITHUB_OUTPUT
+        echo "gid=$(id -g)" >> $GITHUB_OUTPUT
+
+    - name: Run simulation in Docker
+      shell: bash
+      run: |
+        docker run --rm \
+          --entrypoint bash \
+          -e USER_ID=${{ steps.ids.outputs.uid }} \
+          -e GROUP_ID=${{ steps.ids.outputs.gid }} \
+          -v ${{ github.workspace }}:/work \
+          -w /work \
+          hpretl/iic-osic-tools \
+          -c "source ~/.bashrc; ${{ inputs.command }}"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: simulation-output
+        path: ${{ inputs.artifact_file }}
+
