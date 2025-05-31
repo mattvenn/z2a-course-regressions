@@ -1,3 +1,6 @@
 [submodule "simulate-gate"]
 	path = simulate-gate
 	url = git@github.com:mattvenn/simulate-gate.git
+[submodule "magic-mosfet"]
+	path = magic-mosfet
+	url = git@github.com:mattvenn/magic-mosfet.git
