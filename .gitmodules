@@ -4,3 +4,18 @@
 [submodule "magic-mosfet"]
 	path = magic-mosfet
 	url = git@github.com:mattvenn/magic-mosfet.git
+[submodule "frequency_counter"]
+	path = frequency_counter
+	url = git@github.com:mattvenn/frequency_counter.git
+[submodule "tt-multiplexer"]
+	path = tt-multiplexer
+	url = git@github.com:mattvenn/tt-multiplexer.git
+[submodule "formal_timer"]
+	path = formal_timer
+	url = git@github.com:mattvenn/formal_timer.git
+[submodule "rgb_mixer"]
+	path = rgb_mixer
+	url = git@github.com:mattvenn/rgb_mixer.git
+[submodule "rgb_mixer_openlane/rgb_mixer"]
+	path = rgb_mixer_openlane/rgb_mixer
+	url = git@github.com:mattvenn/rgb_mixer.git
